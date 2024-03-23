@@ -4,6 +4,7 @@ import HttpException from '@/utils/exception/http.exception';
 import validationMiddleware from '@/middleware/validate.middleware';
 import validate from '@/resources/post/post.validation';
 import PostService from '@/resources/post/post.service';
+import authenticated from '@/middleware/authenticated.middleware';
 
 class PostController implements Controller {
     public path = '/products';
@@ -15,6 +16,8 @@ class PostController implements Controller {
     }
 
     private initialiseRoutes(): void {
+        this.router.use(authenticated);
+
         this.router.get(`${this.path}`, this.getAllProducts);
         this.router.post(`${this.path}`, validationMiddleware(validate.create), this.create);
         this.router.put(`${this.path}/:id`, validationMiddleware(validate.update), this.update);
