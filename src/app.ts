@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import compression from 'compression';
 import cors from 'cors';
 import morgan from 'morgan';
-import Controller from '@/utils/interfaces/controller.interface';
+import Controller from '@/utils/interfaces/controller.interfaces';
 import ErrorMiddleware from '@/middleware/error.middleware';
 import helmet from 'helmet';
 
@@ -41,10 +41,10 @@ class App {
     }
 
     private initialiseDatabaseConnection(): void {
-        const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH } = process.env;
+        const { MONGO_PATH } = process.env;
 
         mongoose.connect(
-            `mongodb://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`
+            `mongodb://${MONGO_PATH}`
         );
     }
 
