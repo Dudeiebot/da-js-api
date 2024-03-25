@@ -6,6 +6,7 @@ ENV NODE_ENV=development
 
 COPY package*.json ./
 
+#i have this here because sometimes it might be hard installing bcrypt on docker
 RUN apk --no-cache add make gcc g++ python3 \
     && npm install \
     && npm install --only=development \
