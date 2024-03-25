@@ -43,6 +43,7 @@ class UserController implements Controller {
                 password,
                 'user'
             );
+                      console.log('entered here');
 
             res.status(201).json({ token });
         } catch (error: any) {
