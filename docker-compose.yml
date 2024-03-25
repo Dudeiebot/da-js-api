@@ -1,0 +1,28 @@
+version: "3.4"
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: da-js-mongodb
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+  api:
+    build:
+      context: .
+      target: production
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '3000:3000'
+    environment:
+      - URL=http://localhost
+    depends_on:
+      - mongodb
+    command: npm run start
+
+volumes:
+  mongo-data:
