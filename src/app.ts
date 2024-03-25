@@ -7,6 +7,10 @@ import Controller from '@/utils/interfaces/controller.interfaces';
 import ErrorMiddleware from '@/middleware/error.middleware';
 import helmet from 'helmet';
 
+
+// our app.ts doing what it does best, like intializing our db connection, listening our port
+// the main path for all the code "/api", intializing our middleware like helmet, morgan 
+// all this middleware intialised are very important for our specific web app and they have their individual function
 class App {
     public express: Application;
     public port: number;
