@@ -1,12 +1,11 @@
 import UserModel from '@/resources/user/user.model';
 import token from '@/utils/token';
 
+//this is where we call our mongodb queries that works togethr with our interface and model
 class UserService {
     private user = UserModel;
 
-    /**
-     * Register a new user
-     */
+    //.create does put an entry to our db to register new user
     public async register(
         name: string,
         email: string,
@@ -36,9 +35,10 @@ class UserService {
         }
     }
 
-    /**
-     * Attempt to login a user
-     */
+    //so here we are performing some check in and validity
+    //we are cheking if the user email is registered with us (using .findOne)
+    //remember the validity password checking in user.model, we check for it also here
+    //and most especially we are handling the errors well cause we want to know what is the main issue when we encounter one
     public async login(
         email: string,
         password: string
