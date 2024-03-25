@@ -1,5 +1,8 @@
 import { cleanEnv, str, port } from 'envalid';
 
+
+//we use envalid to define our environment path maybe development or production
+//it necessary when deploying cause all the testing is done in development
 function validateEnv(): void {
     cleanEnv(process.env, {
         NODE_ENV: str({
