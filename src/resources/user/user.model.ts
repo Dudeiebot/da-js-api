@@ -25,8 +25,12 @@ const UserSchema = new Schema(
     { timestamps: true }
 );
 
+// Debugging console statement in the pre-save hook
 UserSchema.pre<User>('save', async function (next) {
+    console.log('Before saving user:', this);
+    
     if (!this.isModified('password')) {
+        console.log('Password not modified, skipping hash generation');
         return next();
     }
 
@@ -34,12 +38,17 @@ UserSchema.pre<User>('save', async function (next) {
 
     this.password = hash;
 
+    console.log('After hash generation:', this);
     next();
 });
 
+// Debugging console statement in the isValidPassword method
 UserSchema.methods.isValidPassword = async function (
     password: string
 ): Promise<Error | boolean> {
+    console.log('Validating password:', password);
+    console.log('Stored hash:', this.password);
+    
     return await bcrypt.compare(password, this.password);
 };
 
