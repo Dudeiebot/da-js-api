@@ -16,12 +16,11 @@ class PostController implements Controller {
     }
 
     private initialiseRoutes(): void {
-        this.router.use(authenticated);
 
-        this.router.get(`${this.path}`, this.getAllProducts);
-        this.router.post(`${this.path}`, validationMiddleware(validate.create), this.create);
-        this.router.put(`${this.path}/:id`, validationMiddleware(validate.update), this.update);
-        this.router.delete(`${this.path}/:id`, this.delete);
+        this.router.get(`${this.path}`, authenticated, this.getAllProducts);
+        this.router.post(`${this.path}`, validationMiddleware(validate.create), authenticated, this.create);
+        this.router.put(`${this.path}/:id`, validationMiddleware(validate.update), authenticated, this.update);
+        this.router.delete(`${this.path}/:id`, authenticated, this.delete);
     }
 
     private create = async (
