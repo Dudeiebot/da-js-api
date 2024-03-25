@@ -14,4 +14,7 @@ const login = Joi.object({
     password: Joi.string().required(),
 });
 
+console.log('Register schema:', register.describe());
+console.log('Login schema:', login.describe());
+
 export default { register, login };
