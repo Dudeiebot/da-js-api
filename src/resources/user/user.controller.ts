@@ -6,6 +6,10 @@ import validate from '@/resources/user/user.validation';
 import UserService from '@/resources/user/user.service';
 import authenticated from '@/middleware/authenticated.middleware';
 
+//we are doing 3 things here with our User which are registering, login and getting all our user
+//when we register user, a token is being created from authenticated.middleware in our middleware folder and this is our beare token which automatically gives us access to all the remaining routes.
+//the user can get this token again when the login
+// the 3 routes go through validationMiddleware with joi which validate req.body
 class UserController implements Controller {
     public path = '/users';
     public router = Router();
@@ -15,17 +19,20 @@ class UserController implements Controller {
         this.initialiseRoutes();
     }
 
+    // our api call here is :api/users/register
     private initialiseRoutes(): void {
         this.router.post(
             `${this.path}/register`,
             validationMiddleware(validate.register),
             this.register
         );
+        //our api call here is :api/users/login
         this.router.post(
             `${this.path}/login`,
             validationMiddleware(validate.login),
             this.login
         );
+        //our api call here is :api/users
         this.router.get(`${this.path}`, authenticated, this.getUser);
     }
 
