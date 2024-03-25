@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import Joi from 'joi';
 
+//doing our api calling we need to validate data being to the body of the api routes and this is where joi comes in  //it works together with our mongodb Schema
+//Joi hvae some validationOptions also which have equivalent bool value you can assign to them
+//joi comes with an error message that help us in our error failing scenario
+
 function validationMiddleware(schema: Joi.Schema): RequestHandler {
     return async (
         req: Request,

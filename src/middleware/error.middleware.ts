@@ -1,6 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import HttpException from '@/utils/exception/http.exception';
 
+//this handles all our error in the api routes
+//HttpException error gives us http defined
+//just to reduce the act of defining errors all the time
+
 function errorMiddleware(
     error: HttpException,
     req: Request,
